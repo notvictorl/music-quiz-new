@@ -8,7 +8,12 @@ export default class PlaySongEvent extends DisTubeEvent<Events.PLAY_SONG> {
   run(queue: Queue, song: Song<Metadata>) {
     followUp(
       song.metadata.interaction,
-      new EmbedBuilder().setColor("Blurple").setTitle("DisTube").setDescription(`Playing: \`${song.name}\``),
+      new EmbedBuilder()
+        .setColor(0xFFB7C5)
+        .setTitle(`${song.name}`)
+        .setURL(`${song.url}`)
+        .setDescription(`${song.uploader.name ?? 'Unknown Uploader'}`)
+        .setImage(`${song.thumbnail ?? ''}`),
       queue.textChannel!,
     ).catch(console.error);
   }

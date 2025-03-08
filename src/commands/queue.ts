@@ -15,8 +15,8 @@ export default class QueueCommand extends Command {
     await interaction.reply({
       embeds: [
         new EmbedBuilder()
-          .setColor("Blurple")
-          .setTitle("DisTube")
+          .setColor(0xFFB7C5)
+          .setTitle("Music Quiz")
           .setDescription(
             [
               `**Current:** \`${song.name || song.url}\` - \`${queue.formattedCurrentTime}\`/\`${

@@ -9,13 +9,13 @@ export default class ErrorEvent extends DisTubeEvent<Events.ERROR> {
     if (song) {
       await followUp(
         song.metadata.interaction,
-        new EmbedBuilder().setColor("Blurple").setTitle("DisTube").setDescription(`Error: \`${error.message}\``),
+        new EmbedBuilder().setColor(0xFFB7C5).setTitle("Music Quiz").setDescription(`Error: \`${error.message}\``),
         queue.textChannel!,
       );
     } else if (queue.textChannel) {
       await queue.textChannel.send({
         embeds: [
-          new EmbedBuilder().setColor("Blurple").setTitle("DisTube").setDescription(`Error: \`${error.message}\``),
+          new EmbedBuilder().setColor(0xFFB7C5).setTitle("Music Quiz").setDescription(`Error: \`${error.message}\``),
         ],
       });
     } else {

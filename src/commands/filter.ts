@@ -25,8 +25,8 @@ export default class FilterCommand extends Command {
     await interaction.reply({
       embeds: [
         new EmbedBuilder()
-          .setColor("Blurple")
-          .setTitle("DisTube")
+          .setColor(0xFFB7C5)
+          .setTitle("Music Quiz")
           .setDescription(`Current filter: \`${filters.names.join(", ") || "Off"}\``),
       ],
     });

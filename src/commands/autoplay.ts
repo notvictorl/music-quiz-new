@@ -12,15 +12,15 @@ export default class AutoplayCommand extends Command {
       await interaction.reply({
         embeds: [
           new EmbedBuilder()
-            .setColor("Blurple")
-            .setTitle("DisTube")
+            .setColor(0xFFB7C5)
+            .setTitle("Music Quiz")
             .setDescription(`Autoplay: \`${this.distube.toggleAutoplay(interaction) ? "On" : "Off"}\``),
         ],
       });
     } catch (e) {
       console.error(e);
       interaction.reply({
-        embeds: [new EmbedBuilder().setColor("Blurple").setTitle("DisTube").setDescription(`Error: \`${e}\``)],
+        embeds: [new EmbedBuilder().setColor(0xFFB7C5).setTitle("Music Quiz").setDescription(`Error: \`${e}\``)],
       });
     }
   }

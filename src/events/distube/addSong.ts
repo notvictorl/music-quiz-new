@@ -9,8 +9,8 @@ export default class AddSongEvent extends DisTubeEvent<Events.ADD_SONG> {
     song.metadata.interaction.editReply({
       embeds: [
         new EmbedBuilder()
-          .setColor("Blurple")
-          .setTitle("DisTube")
+          .setColor(0xFFB7C5)
+          .setTitle("Music Quiz")
           .setDescription(`Added \`${song.name}\` to the queue`),
       ],
     });

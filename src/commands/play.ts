@@ -35,7 +35,7 @@ export default class PlayCommand extends Command {
         console.error(e);
         interaction.editReply({
           embeds: [
-            new EmbedBuilder().setColor("Blurple").setTitle("DisTube").setDescription(`Error: \`${e.message}\``),
+            new EmbedBuilder().setColor(0xFFB7C5).setTitle("Music Quiz").setDescription(`Error: \`${e.message}\``),
           ],
         });
       });

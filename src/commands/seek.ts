@@ -17,7 +17,7 @@ export default class SeekCommand extends Command {
     this.distube.seek(interaction, time);
     await interaction.reply({
       embeds: [
-        new EmbedBuilder().setColor("Blurple").setTitle("DisTube").setDescription(`Seeked to \`${time}\` seconds`),
+        new EmbedBuilder().setColor(0xFFB7C5).setTitle("Music Quiz").setDescription(`Seeked to \`${time}\` seconds`),
       ],
     });
   }

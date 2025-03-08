@@ -7,7 +7,7 @@ export default class NoRelatedEvent extends DisTubeEvent<Events.NO_RELATED> {
   readonly name = Events.NO_RELATED;
   run(queue: Queue, error: DisTubeError) {
     queue.textChannel?.send({
-      embeds: [new EmbedBuilder().setColor(Colors.Red).setTitle("DisTube").setDescription(error.message)],
+      embeds: [new EmbedBuilder().setColor(Colors.Red).setTitle("Music Quiz").setDescription(error.message)],
     });
   }
 }

@@ -9,8 +9,8 @@ export default class AddListEvent extends DisTubeEvent<Events.ADD_LIST> {
     playlist.metadata.interaction.editReply({
       embeds: [
         new EmbedBuilder()
-          .setColor("Blurple")
-          .setTitle("DisTube")
+          .setColor(0xFFB7C5)
+          .setTitle("Music Quiz")
           .setDescription(`Added \`${playlist.name}\` (${playlist.songs.length} songs) to the queue`),
       ],
     });

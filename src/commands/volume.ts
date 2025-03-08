@@ -17,7 +17,7 @@ export default class VolumeCommand extends Command {
     this.distube.setVolume(interaction, volume);
     await interaction.reply({
       embeds: [
-        new EmbedBuilder().setColor("Blurple").setTitle("DisTube").setDescription(`Set volume to \`${volume}\``),
+        new EmbedBuilder().setColor(0xFFB7C5).setTitle("Music Quiz").setDescription(`Set volume to \`${volume}\``),
       ],
     });
   }

@@ -11,12 +11,12 @@ export default class StopCommand extends Command {
     try {
       await this.distube.stop(interaction);
       interaction.reply({
-        embeds: [new EmbedBuilder().setColor("Blurple").setTitle("DisTube").setDescription("Stopped!")],
+        embeds: [new EmbedBuilder().setColor(0xFFB7C5).setTitle("Music Quiz").setDescription("Stopped!")],
       });
     } catch (e) {
       console.error(e);
       interaction.reply({
-        embeds: [new EmbedBuilder().setColor("Blurple").setTitle("DisTube").setDescription(`Error: \`${e}\``)],
+        embeds: [new EmbedBuilder().setColor(0xFFB7C5).setTitle("Music Quiz").setDescription(`Error: \`${e}\``)],
       });
     }
   }
