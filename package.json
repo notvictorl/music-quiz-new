@@ -20,7 +20,7 @@
   "homepage": "https://github.com/distubejs/example#readme",
   "dependencies": {
     "@discordjs/opus": "^0.10.0",
-    "@discordjs/voice": "^0.17.0",
+    "@discordjs/voice": "^0.18.0",
     "@distube/deezer": "^2.0.0",
     "@distube/direct-link": "^1.0.0",
     "@distube/file": "^1.0.0",
