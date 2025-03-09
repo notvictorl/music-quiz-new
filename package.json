@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/distubejs/example.git"
+    "url": "git+ssh://git@github.com/fetf/music-quiz-new.git"
   },
-  "author": "Skick",
+  "author": "@notvictorl",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/distubejs/example/issues"
+    "url": "https://github.com/fetf/music-quiz-new/issues"
   },
-  "homepage": "https://github.com/distubejs/example#readme",
+  "homepage": "https://github.com/fetf/music-quiz-new#readme",
   "dependencies": {
     "@discordjs/opus": "^0.10.0",
     "@discordjs/voice": "^0.18.0",
@@ -29,6 +29,7 @@
     "@distube/youtube": "^1.0.0",
     "discord.js": "^14.15.3",
     "distube": "^5.0.1",
+    "dotenv": "^16.4.7",
     "sodium-native": "^4.1.1"
   },
   "devDependencies": {

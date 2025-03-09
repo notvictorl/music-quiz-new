@@ -1,5 +1,4 @@
 import { DisTubeEvent } from "../..";
-// import { EmbedBuilder } from "discord.js";
 import { Events, type Queue } from "distube";
 
 export default class FinishEvent extends DisTubeEvent<Events.FINISH> {
@@ -14,15 +13,10 @@ export default class FinishEvent extends DisTubeEvent<Events.FINISH> {
         queue.voice.leave();
         queue.textChannel?.send("**Leaving voice channel due to inactivity.**");
       }
-    }, ( 5 * 60 * 1000 ));
+    }, 5 * 60 * 1000);
 
     this.distube.on(Events.ADD_SONG, () => {
       clearTimeout(this.leaveTimeout);
     });
-    
-    // queue.textChannel?.send({
-    //   embeds: [new EmbedBuilder().setColor(0xFFB7C5).setTitle("Music Quiz").setDescription("Finished!")],
-    // });
-    // queue.voice.leave();
   }
 }

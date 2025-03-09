@@ -11,7 +11,7 @@ export default class AddSongEvent extends DisTubeEvent<Events.ADD_SONG> {
         new EmbedBuilder()
           .setColor(0xFFB7C5)
           .setTitle("Music Quiz")
-          .setDescription(`Added \`${song.name}\` to the queue`),
+          .setDescription(song.url ? `Added [\`${song.name}\`](${song.url})` : `Added \`${song.name}\` to the queue`),
       ],
     });
   }

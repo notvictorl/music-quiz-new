@@ -20,19 +20,21 @@ import type {
 import SoundCloudPlugin from "@distube/soundcloud";
 import DeezerPlugin from "@distube/deezer";
 import { DirectLinkPlugin } from "@distube/direct-link";
+require("dotenv").config();
 
 const TOKEN = process.env.TOKEN;
 
 export const followUp = async (
   interaction: ChatInputCommandInteraction,
+  content: string,
   embed: EmbedBuilder,
   textChannel: GuildTextBasedChannel,
 ) => {
   // Follow up interaction if created time is less than 15 minutes
   if (Date.now() - interaction.createdTimestamp < 15 * 60 * 1000) {
-    await interaction.followUp({ embeds: [embed] });
+    await interaction.followUp({ content: content, embeds: [embed] });
   } else {
-    await textChannel.send({ embeds: [embed] });
+    await textChannel.send({ content: content, embeds: [embed] });
   }
 };
 
