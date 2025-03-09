@@ -18,7 +18,6 @@ export default class FinishEvent extends DisTubeEvent<Events.FINISH> {
 
     this.distube.on(Events.ADD_SONG, () => {
       clearTimeout(this.leaveTimeout);
-      console.log('reset timeout');
     });
     
     // queue.textChannel?.send({
