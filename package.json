@@ -1,7 +1,7 @@
 {
-  "name": "distube-example",
+  "name": "music-quiz",
   "version": "1.0.0",
-  "description": "DisTube example music bot.",
+  "description": "Music Quiz Bot",
   "scripts": {
     "start": "ts-node src/index.ts",
     "lint": "eslint .",

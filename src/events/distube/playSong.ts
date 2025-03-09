@@ -13,7 +13,11 @@ export default class PlaySongEvent extends DisTubeEvent<Events.PLAY_SONG> {
         .setTitle(`${song.name}`)
         .setURL(`${song.url}`)
         .setDescription(`${song.uploader.name ?? 'Unknown Uploader'}`)
-        .setImage(`${song.thumbnail ?? ''}`),
+        .setImage(`${song.thumbnail ?? ''}`)
+        .setFooter({
+          text: `Requested by ${song.user?.displayName}`,
+          iconURL: song.user?.displayAvatarURL({ size: 128 }),
+        }),
       queue.textChannel!,
     ).catch(console.error);
   }
