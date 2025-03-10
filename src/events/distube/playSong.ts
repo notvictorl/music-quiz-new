@@ -1,12 +1,12 @@
 import { Events } from "distube";
 import { EmbedBuilder } from "discord.js";
-import { DisTubeEvent, type Metadata, followUp } from "../..";
+import { DisTubeEvent, type Metadata, followUp2 } from "../..";
 import type { Queue, Song } from "distube";
 
 export default class PlaySongEvent extends DisTubeEvent<Events.PLAY_SONG> {
   readonly name = Events.PLAY_SONG;
   run(queue: Queue, song: Song<Metadata>) {
-    followUp(
+    followUp2(
       song.metadata.interaction,
       "**Playing now:**",
       new EmbedBuilder()

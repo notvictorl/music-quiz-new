@@ -26,6 +26,19 @@ const TOKEN = process.env.TOKEN;
 
 export const followUp = async (
   interaction: ChatInputCommandInteraction,
+  embed: EmbedBuilder,
+  textChannel: GuildTextBasedChannel,
+) => {
+  // Follow up interaction if created time is less than 15 minutes
+  if (Date.now() - interaction.createdTimestamp < 15 * 60 * 1000) {
+    await interaction.followUp({ embeds: [embed] });
+  } else {
+    await textChannel.send({ embeds: [embed] });
+  }
+};
+
+export const followUp2 = async (
+  interaction: ChatInputCommandInteraction,
   content: string,
   embed: EmbedBuilder,
   textChannel: GuildTextBasedChannel,
