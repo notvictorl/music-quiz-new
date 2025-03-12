@@ -13,7 +13,7 @@ export default class FinishEvent extends DisTubeEvent<Events.FINISH> {
         queue.voice.leave();
         queue.textChannel?.send("**Leaving voice channel due to inactivity.**");
       }
-    }, 5 * 60 * 1000);
+    }, 10 * 60 * 1000);
 
     this.distube.on(Events.ADD_SONG, () => {
       clearTimeout(this.leaveTimeout);
