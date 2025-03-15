@@ -20,7 +20,8 @@ import type {
 import SoundCloudPlugin from "@distube/soundcloud";
 import DeezerPlugin from "@distube/deezer";
 import { DirectLinkPlugin } from "@distube/direct-link";
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
 const TOKEN = process.env.TOKEN;
 
@@ -71,6 +72,7 @@ class DisTubeClient extends Client<true> {
 
     readdirSync(join(__dirname, "events", "client")).forEach(this.loadEvent.bind(this));
     readdirSync(join(__dirname, "events", "distube")).forEach(this.loadDisTubeEvent.bind(this));
+    readdirSync(join(__dirname, "events", "custom")).forEach(this.loadCustomEvent.bind(this));
     readdirSync(join(__dirname, "commands")).forEach(this.loadCommand.bind(this));
   }
   async loadCommand(name: string) {
@@ -111,6 +113,20 @@ class DisTubeClient extends Client<true> {
       return false;
     } catch (err: any) {
       const e = `Unable to listen "${name}" event: ${err.stack || err}`;
+      console.error(e);
+      return e;
+    }
+  }
+
+  async loadCustomEvent(name: string) {
+    try {
+      const E = await import(`./events/custom/${name}`);
+      const event = new E.default(this);
+      // Register your custom event handler
+      console.log(`Registered custom event: ${event.name}.`);
+      return false;
+    } catch (err: any) {
+      const e = `Unable to register custom event "${name}": ${err.stack || err}`;
       console.error(e);
       return e;
     }
