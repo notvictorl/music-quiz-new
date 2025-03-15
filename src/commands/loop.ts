@@ -16,9 +16,9 @@ export default class LoopCommand extends Command {
         .setDescription("The repeat mode to set")
         .setRequired(true)
         .addChoices(
-          { name: "Off", value: RepeatMode.DISABLED.toString() },
-          { name: "Song", value: RepeatMode.SONG.toString() },
-          { name: "Queue", value: RepeatMode.QUEUE.toString() },
+          { name: "off", value: RepeatMode.DISABLED.toString() },
+          { name: "song", value: RepeatMode.SONG.toString() },
+          { name: "queue", value: RepeatMode.QUEUE.toString() },
         )
     );
 
