@@ -15,6 +15,7 @@ export default class PlaySongEvent extends DisTubeEvent<Events.PLAY_SONG> {
       .setURL(`${song.url}`)
       .setDescription(`${song.uploader.name ?? 'Unknown Uploader'}`)
       .setImage(`${song.thumbnail ?? ''}`)
+      .setTimestamp()
       .setFooter({
         text: `Requested by ${song.user?.displayName}`,
         iconURL: song.user?.displayAvatarURL({ size: 128 }),
