@@ -28,7 +28,11 @@ export default class QueueCommand extends Command {
                   .map((song, i) => `**${i + 1}.** \`${song.name || song.url}\``)
                   .join("\n") || "None"
               }`,
+              `-# ${
+                queue.songs.length >= 10 ? `and ${queue.songs.length-9} more...` : ''
+              }`,
             ].join("\n"),
+            
           )
           .addFields(
             {
