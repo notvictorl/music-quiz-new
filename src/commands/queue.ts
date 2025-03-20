@@ -17,6 +17,7 @@ export default class QueueCommand extends Command {
         new EmbedBuilder()
           .setColor(0xFFB7C5)
           .setTitle("Music Quiz")
+          .setThumbnail(song.thumbnail ?? '')
           .setDescription(
             [
               `**Current:** \`${song.name || song.url}\` - \`${queue.formattedCurrentTime}\`/\`${
@@ -25,14 +26,13 @@ export default class QueueCommand extends Command {
               `**Up next**\n${
                 queue.songs
                   .slice(1, 10)
-                  .map((song, i) => `**${i + 1}.** \`${song.name || song.url}\``)
+                  .map((song, i) => `**${i + 1}.** \[${song.formattedDuration}\] \`${song.name || song.url}\``)
                   .join("\n") || "None"
               }`,
               `-# ${
-                queue.songs.length >= 10 ? `and ${queue.songs.length-9} more...` : ''
+                queue.songs.length > 10 ? `and ${queue.songs.length - 10} more...` : ''
               }`,
             ].join("\n"),
-            
           )
           .addFields(
             {

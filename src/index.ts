@@ -66,6 +66,7 @@ class DisTubeClient extends Client<true> {
     emitAddSongWhenCreatingQueue: true,
   });
   commands = new Collection<string, Command>();
+  leaveTimeout?: NodeJS.Timeout;
 
   constructor(options: ClientOptions) {
     super(options);

@@ -34,10 +34,10 @@ export default class SearchCommand extends Command {
         .setURL(`${searchResult.url}`)
         .setThumbnail(`${searchResult.thumbnail ?? ''}`)
         .addFields(
-          { name: searchResult.isLive ? '**LIVE**' : 'Duration', value: searchResult.isLive ? '' : searchResult.formattedDuration, inline: true },
           { name: searchResult.isLive ? 'Viewers' : 'Views:', value: shortenViewCount(searchResult.views ?? 0), inline: true },
+          { name: searchResult.isLive ? '**LIVE**' : 'Duration', value: searchResult.isLive ? '' : searchResult.formattedDuration, inline: true },
         )
-        .setDescription(`\[${searchResult.uploader.name ?? 'Unknown uploader'}\]\(${searchResult.uploader.url}\))`);
+        .setDescription(`\[${searchResult.uploader.name ?? 'Unknown uploader'}\]\(${searchResult.uploader.url}\)`);
       embeds.push(embed);
       if (!vc) continue;
       const button = new ButtonBuilder()

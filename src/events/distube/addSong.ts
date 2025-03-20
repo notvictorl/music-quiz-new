@@ -15,5 +15,6 @@ export default class AddSongEvent extends DisTubeEvent<Events.ADD_SONG> {
           .setDescription(song.url ? `Added [\`${song.name}\`](${song.url})` : `Added \`${song.name}\` to the queue`),
       ],
     });
+    clearTimeout(this.client.leaveTimeout);
   }
 }
