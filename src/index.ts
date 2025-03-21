@@ -21,6 +21,7 @@ import SoundCloudPlugin from "@distube/soundcloud";
 import DeezerPlugin from "@distube/deezer";
 import { DirectLinkPlugin } from "@distube/direct-link";
 import dotenv from "dotenv";
+import { EventEmitter } from "stream";
 dotenv.config();
 
 const TOKEN = process.env.TOKEN;
@@ -64,8 +65,10 @@ class DisTubeClient extends Client<true> {
     ],
     emitAddListWhenCreatingQueue: true,
     emitAddSongWhenCreatingQueue: true,
+    emitNewSongOnly: true,
   });
   commands = new Collection<string, Command>();
+  customEmitter = new EventEmitter();
   leaveTimeout?: NodeJS.Timeout;
 
   constructor(options: ClientOptions) {
@@ -123,7 +126,8 @@ class DisTubeClient extends Client<true> {
     try {
       const E = await import(`./events/custom/${name}`);
       const event = new E.default(this);
-      // Register your custom event handler
+      const fn = event.run.bind(event);
+      this.customEmitter.on(event.name, fn);
       console.log(`Registered custom event: ${event.name}.`);
       return false;
     } catch (err: any) {
@@ -205,6 +209,28 @@ export abstract class DisTubeEvent<T extends keyof DisTubeEvents> {
   abstract run(...args: DisTubeEvents[T]): Awaitable<any>;
 
   async execute(...args: DisTubeEvents[T]) {
+    try {
+      await this.run(...args);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+}
+
+export abstract class CustomEvent<T extends string> {
+  client: DisTubeClient;
+  abstract readonly name: T;
+  constructor(client: DisTubeClient) {
+    this.client = client;
+  }
+
+  get distube() {
+    return this.client.distube;
+  }
+
+  abstract run(...args: any[]): Awaitable<any>;
+
+  async execute(...args: any[]) {
     try {
       await this.run(...args);
     } catch (err) {

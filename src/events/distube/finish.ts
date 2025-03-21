@@ -12,6 +12,6 @@ export default class FinishEvent extends DisTubeEvent<Events.FINISH> {
         queue.voice.leave();
         queue.textChannel?.send("**Leaving voice channel due to inactivity.**");
       }
-    }, 1 * 60_000);
+    }, 30 * 60_000);
   }
 }
