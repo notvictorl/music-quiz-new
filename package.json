@@ -6,7 +6,8 @@
     "start": "ts-node src/index.ts",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "p": "prettier . --write"
+    "p": "prettier . --write",
+    "deploy": "ts-node src/deploy-commands.ts"
   },
   "repository": {
     "type": "git",

@@ -20,9 +20,11 @@ import type {
 import SoundCloudPlugin from "@distube/soundcloud";
 import DeezerPlugin from "@distube/deezer";
 import { DirectLinkPlugin } from "@distube/direct-link";
-import dotenv from "dotenv";
 import { EventEmitter } from "stream";
+import dotenv from "dotenv";
 dotenv.config();
+
+import { Quiz } from "./quiz/quiz"
 
 const TOKEN = process.env.TOKEN;
 
@@ -70,6 +72,7 @@ class DisTubeClient extends Client<true> {
   commands = new Collection<string, Command>();
   customEmitter = new EventEmitter();
   leaveTimeout?: NodeJS.Timeout;
+  quiz = new Quiz(this);
 
   constructor(options: ClientOptions) {
     super(options);
@@ -128,10 +131,10 @@ class DisTubeClient extends Client<true> {
       const event = new E.default(this);
       const fn = event.run.bind(event);
       this.customEmitter.on(event.name, fn);
-      console.log(`Registered custom event: ${event.name}.`);
+      console.log(`Listened custom event: ${event.name}.`);
       return false;
     } catch (err: any) {
-      const e = `Unable to register custom event "${name}": ${err.stack || err}`;
+      const e = `Unable to listen "${name}" event : ${err.stack || err}`;
       console.error(e);
       return e;
     }

@@ -4,7 +4,7 @@ import type { VoiceState } from "discord.js";
 export default class VoiceStateUpdateEvent extends ClientEvent<"voiceStateUpdate"> {
   readonly name = "voiceStateUpdate";
 
-  async run(_oldState: VoiceState, newState: VoiceState) {
+  async run( oldState: VoiceState, newState: VoiceState) {
     /* oldState, newState behave within guilds
     * so within a guild 1 set of \{oldState, newState\} is created
     * but between 2 guilds 2 sets are created
@@ -12,8 +12,12 @@ export default class VoiceStateUpdateEvent extends ClientEvent<"voiceStateUpdate
 
     const currentVoiceChannelId = this.client.distube.getQueue(newState.guild)?.voiceChannel?.id;
     if (!currentVoiceChannelId) return;
+
+    if (oldState.channelId === currentVoiceChannelId) {
+
+    }
     if (newState.channelId === currentVoiceChannelId) {
-      newState.guild
+
     }
     // this.client.distube.getQueue(newState.guild)?.voiceChannel
     // TODO: check if its a voice channel we are playing in
@@ -24,8 +28,8 @@ export default class VoiceStateUpdateEvent extends ClientEvent<"voiceStateUpdate
     // await this.checkEmpty(newState);
     // await this.checkNotEmpty(oldState, newState);
     // console.log('event activated');
-    this.client.customEmitter.emit('emptyChannel');
-    this.client.customEmitter.emit('firstJoin');
+    this.client.customEmitter.emit('emptyChannel', currentVoiceChannelId);
+    this.client.customEmitter.emit('firstJoin', currentVoiceChannelId);
   }
 
   async checkEmpty(newState: VoiceState) {
