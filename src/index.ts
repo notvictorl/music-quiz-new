@@ -24,8 +24,6 @@ import { EventEmitter } from "stream";
 import dotenv from "dotenv";
 dotenv.config();
 
-import { Quiz } from "./quiz/quiz"
-
 const TOKEN = process.env.TOKEN;
 
 export const followUp = async (
@@ -72,7 +70,6 @@ class DisTubeClient extends Client<true> {
   commands = new Collection<string, Command>();
   customEmitter = new EventEmitter();
   leaveTimeout?: NodeJS.Timeout;
-  quiz = new Quiz(this);
 
   constructor(options: ClientOptions) {
     super(options);

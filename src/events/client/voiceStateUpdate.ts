@@ -4,7 +4,7 @@ import type { VoiceState } from "discord.js";
 export default class VoiceStateUpdateEvent extends ClientEvent<"voiceStateUpdate"> {
   readonly name = "voiceStateUpdate";
 
-  async run( oldState: VoiceState, newState: VoiceState) {
+  async run(oldState: VoiceState, newState: VoiceState) {
     /* oldState, newState behave within guilds
     * so within a guild 1 set of \{oldState, newState\} is created
     * but between 2 guilds 2 sets are created
@@ -13,60 +13,27 @@ export default class VoiceStateUpdateEvent extends ClientEvent<"voiceStateUpdate
     const currentVoiceChannelId = this.client.distube.getQueue(newState.guild)?.voiceChannel?.id;
     if (!currentVoiceChannelId) return;
 
-    if (oldState.channelId === currentVoiceChannelId) {
+    // Get the voice channel the bot is currently in
+    const voiceChannel = this.client.distube.getQueue(newState.guild)?.voiceChannel;
+    if (!voiceChannel) return;
 
+    // Count non-bot users in the channel
+    const nonBotMemberCount = voiceChannel.members.filter(member => !member.user.bot).size;
+
+    // Check if a user left the channel
+    if (oldState.channelId === currentVoiceChannelId && newState.channelId !== currentVoiceChannelId) {
+      // If this was the last non-bot user leaving, emit emptyChannel event
+      if (nonBotMemberCount === 0) {
+        this.client.customEmitter.emit('emptyChannel', currentVoiceChannelId);
+      }
     }
-    if (newState.channelId === currentVoiceChannelId) {
 
+    // Check if a user joined the channel
+    if (oldState.channelId !== currentVoiceChannelId && newState.channelId === currentVoiceChannelId) {
+      // If this was the first non-bot user joining, emit firstJoin event
+      if (nonBotMemberCount === 1) {
+        this.client.customEmitter.emit('firstJoin', currentVoiceChannelId);
+      }
     }
-    // this.client.distube.getQueue(newState.guild)?.voiceChannel
-    // TODO: check if its a voice channel we are playing in
-    // const queue = this.client.distube.getQueue(newState.guild);
-    // if (!queue) return;
-
-    // TODO: check if the queue is playing/paused before attempting to pause/play
-    // await this.checkEmpty(newState);
-    // await this.checkNotEmpty(oldState, newState);
-    // console.log('event activated');
-    this.client.customEmitter.emit('emptyChannel', currentVoiceChannelId);
-    this.client.customEmitter.emit('firstJoin', currentVoiceChannelId);
-  }
-
-  async checkEmpty(newState: VoiceState) {
-    if (!newState.channel) return;
-
-    const newChannel = newState.channel;
-    const nonBotMemberCount = newChannel.members.filter(member => !member.user.bot).size;
-
-    if (nonBotMemberCount === 0) {
-      console.log('pausing...');
-      const queue = this.client.distube.getQueue(newState.guild);
-      if (!queue) return;
-      await queue.pause();
-      this.client.leaveTimeout = setTimeout(() => {
-        if (queue.voice) {
-          queue.voice.leave();
-        }
-      }, 5 * 60_000);
-    }
-  }
-
-  async checkNotEmpty(oldState: VoiceState, newState: VoiceState) {
-    const oldChannel = oldState.channel;
-    const newChannel = newState.channel;
-    if (!oldChannel || !newChannel) return;
-
-    const oldMemberCount = oldChannel.members.filter(member => !member.user.bot).size;
-    if (oldMemberCount !== 0) return;
-    const newMemberCount = newChannel.members.filter(member => !member.user.bot).size;
-    if (oldMemberCount === newMemberCount) return;
-
-    const queue = this.client.distube.getQueue(newState.guild);
-    if (!queue) return;
-
-    console.log('resuming...');
-
-    queue.resume();
-    clearTimeout(this.client.leaveTimeout);
   }
 }

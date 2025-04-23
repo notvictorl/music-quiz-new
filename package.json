@@ -1,7 +1,14 @@
 {
   "name": "music-quiz",
   "version": "1.0.0",
-  "description": "Music Quiz Bot",
+  "description": "Music Quiz Discord Bot - play and guess songs",
+  "keywords": [
+    "discord",
+    "bot",
+    "music",
+    "trivia",
+    "quiz"
+  ],
   "scripts": {
     "start": "ts-node src/index.ts",
     "lint": "eslint .",
@@ -11,12 +18,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/fetf/music-quiz-new.git"
+    "url": "git+ssh://git@github.com/notvictorl/music-quiz.git"
   },
   "author": "@notvictorl",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fetf/music-quiz-new/issues"
+    "url": "https://github.com/notvictorl/music-quiz/issues"
   },
   "homepage": "https://github.com/fetf/music-quiz-new#readme",
   "dependencies": {
@@ -32,7 +39,8 @@
     "discord.js": "^14.15.3",
     "distube": "^5.0.1",
     "dotenv": "^16.4.7",
-    "sodium-native": "^5.0.1"
+    "sodium-native": "^5.0.1",
+    "youtubei.js": "^13.3.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.1",
