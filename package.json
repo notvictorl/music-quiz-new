@@ -32,7 +32,7 @@
     "discord.js": "^14.15.3",
     "distube": "^5.0.1",
     "dotenv": "^16.4.7",
-    "sodium-native": "^4.1.1"
+    "sodium-native": "^5.0.1"
   },
   "devDependencies": {
     "@types/node": "^22.13.10",
